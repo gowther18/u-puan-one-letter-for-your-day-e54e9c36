@@ -36,6 +36,13 @@ import os
 LETTER = "P"
 OUTPUT_PATH = "/output/entry.txt"
 
+# Gate guard: the entry must be exactly one letter, A-Z. A trailing
+# newline, a second character, or a non-letter would all be refused,
+# so fail loudly here instead of writing an invalid entry.
+assert len(LETTER) == 1 and LETTER.isalpha() and LETTER.isupper(), (
+    f"LETTER must be a single uppercase A-Z letter, got {LETTER!r}"
+)
+
 
 def main() -> None:
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
